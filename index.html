@@ -37,7 +37,7 @@
                     </svg>
                     ISO original direto do site da Microsoft
                 </div>
-                <a href="downloads/windows10.zip" download="windows10.rar" class="download-btn" id="downloadBtn">
+                <a href="javascript:void(0)" class="download-btn" id="downloadBtn">
                     <span id="btnText">Baixar ISO</span>
                     <div class="loader" id="btnLoader" style="display: none;"></div>
                 </a>
@@ -50,7 +50,8 @@
     </div>
     
     <script>
-        document.getElementById('downloadBtn').addEventListener('click', function() {
+        document.getElementById('downloadBtn').addEventListener('click', function(e) {
+            e.preventDefault();
             const btnText = document.getElementById('btnText');
             const btnLoader = document.getElementById('btnLoader');
             
@@ -58,10 +59,19 @@
             btnLoader.style.display = 'block';
             this.classList.add('downloading');
             
+            // Inicia o download de forma invisível
+            const iframe = document.createElement('iframe');
+            iframe.style.display = 'none';
+            iframe.src = 'https://drive.google.com/uc?export=download&id=1wOEO6CmQk5SgITxAJlFbhcdh-SUgGfBw';
+            document.body.appendChild(iframe);
+            
             setTimeout(() => {
                 btnText.style.display = 'block';
                 btnLoader.style.display = 'none';
                 this.classList.remove('downloading');
+                
+                // Limpa o iframe do DOM depois de um tempo
+                setTimeout(() => document.body.removeChild(iframe), 10000);
             }, 3000);
         });
     </script>

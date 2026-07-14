@@ -4,7 +4,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Baixar Windows 10 ISO</title>
+    <!-- SEO Otimizado -->
+    <title>Download Windows 10 ISO (64-bits) - Original e Grátis</title>
+    <meta name="description" content="Baixe a ISO do Windows 10 original (64-bits) com alta velocidade. A versão mais estável para formatar e atualizar o seu PC. Link direto.">
+    <meta name="keywords" content="baixar windows 10, windows 10 iso, download win10, win 10 64 bits, baixar iso windows 10 original, formatar pc, download windows 10 pt-br">
+    
+    <!-- Open Graph (Compartilhamento em Redes Sociais) -->
+    <meta property="og:title" content="Download Windows 10 ISO (64-bits) - Original e Grátis">
+    <meta property="og:description" content="Baixe a ISO do Windows 10 original (64-bits) com alta velocidade.">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="pt_BR">
+    
+    <!-- Para garantir indexação na Vercel/Google -->
+    <meta name="robots" content="index, follow">
+
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
 </head>
@@ -12,8 +25,8 @@
 <body>
     <div class="container">
         <header>
-            <h1>Windows 10</h1>
-            <p>A versão mais estável e rápida para o seu PC.</p>
+            <h1 aria-label="Baixar Windows 10 ISO">Windows 10</h1>
+            <p>Faça o download da ISO original e prepare seu PC com a versão mais estável.</p>
         </header>
 
         <main>
@@ -99,11 +112,11 @@
         btnConfirmDownload.addEventListener('click', () => {
             warningModal.classList.remove('active');
             
-            // Inicia o download com a flag confirm=t para tentar pular a tela do Google
+            // Inicia o download direto e ultrarrápido da Cloudflare R2
             const link = document.createElement('a');
             link.style.display = 'none';
-            link.href = 'https://drive.google.com/uc?export=download&confirm=t&id=1wOEO6CmQk5SgITxAJlFbhcdh-SUgGfBw';
-            link.target = '_blank';
+            link.href = 'https://pub-f96ac53119af46a09b0b55ffcb0450d3.r2.dev/Win10_22H2_BrazilianPortuguese_x64v1.iso';
+            // link.target = '_blank'; // Não precisamos mais abrir nova aba, pois é download direto
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);

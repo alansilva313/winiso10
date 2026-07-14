@@ -60,18 +60,18 @@
             this.classList.add('downloading');
             
             // Inicia o download de forma invisível
-            const iframe = document.createElement('iframe');
-            iframe.style.display = 'none';
-            iframe.src = 'https://drive.google.com/uc?export=download&id=1wOEO6CmQk5SgITxAJlFbhcdh-SUgGfBw';
-            document.body.appendChild(iframe);
+            const link = document.createElement('a');
+            link.style.display = 'none';
+            link.href = 'https://drive.google.com/uc?export=download&id=1wOEO6CmQk5SgITxAJlFbhcdh-SUgGfBw';
+            link.target = '_blank'; // Abre em nova aba caso o Google Drive peça confirmação de tamanho/vírus
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
             
             setTimeout(() => {
                 btnText.style.display = 'block';
                 btnLoader.style.display = 'none';
                 this.classList.remove('downloading');
-                
-                // Limpa o iframe do DOM depois de um tempo
-                setTimeout(() => document.body.removeChild(iframe), 10000);
             }, 3000);
         });
     </script>

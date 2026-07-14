@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Baixar Windows 10 ISO</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>Windows 10</h1>
+            <p>A versão mais estável e rápida para o seu PC.</p>
+        </header>
+
+        <main>
+            <div class="download-card">
+                <div class="card-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                        <polyline points="7 10 12 15 17 10"></polyline>
+                        <line x1="12" y1="15" x2="12" y2="3"></line>
+                    </svg>
+                </div>
+                <h2>Imagem ISO (64-bits)</h2>
+                <p>Tamanho do arquivo: ~5.0 GB</p>
+                <div
+                    style="display: flex; align-items: center; justify-content: center; gap: 0.5rem; color: #10b981; margin-top: -1rem; margin-bottom: 2rem; font-size: 0.9rem; font-weight: 600;">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                        <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                    </svg>
+                    ISO original direto do site da Microsoft
+                </div>
+                <a href="downloads/windows10.zip" download="windows10.rar" class="download-btn" id="downloadBtn">
+                    <span id="btnText">Baixar ISO</span>
+                    <div class="loader" id="btnLoader" style="display: none;"></div>
+                </a>
+            </div>
+        </main>
+
+        <footer>
+            <p>&copy; 2026 Download Center. Todos os direitos reservados.</p>
+        </footer>
+    </div>
+    
+    <script>
+        document.getElementById('downloadBtn').addEventListener('click', function() {
+            const btnText = document.getElementById('btnText');
+            const btnLoader = document.getElementById('btnLoader');
+            
+            btnText.style.display = 'none';
+            btnLoader.style.display = 'block';
+            this.classList.add('downloading');
+            
+            setTimeout(() => {
+                btnText.style.display = 'block';
+                btnLoader.style.display = 'none';
+                this.classList.remove('downloading');
+            }, 3000);
+        });
+    </script>
+</body>
+
+</html>

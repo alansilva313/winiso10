@@ -44,35 +44,69 @@
             </div>
         </main>
 
+        <!-- Modal de Aviso -->
+        <div class="modal-overlay" id="warningModal">
+            <div class="modal">
+                <div class="modal-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+                        <line x1="12" y1="9" x2="12" y2="13"></line>
+                        <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                    </svg>
+                </div>
+                <h3>Aviso de Segurança</h3>
+                <p>O arquivo <strong>Win10_22H2_BrazilianPortuguese_x64v1.iso</strong> (5.4 GB) é muito grande para ser verificado contra vírus automaticamente.</p>
+                <p>Deseja fazer o download mesmo assim?</p>
+                <div class="modal-actions">
+                    <button class="btn-cancel" id="btnCancel">Cancelar</button>
+                    <button class="btn-confirm" id="btnConfirmDownload">Baixar mesmo assim</button>
+                </div>
+            </div>
+        </div>
+
         <footer>
             <p>&copy; 2026 Download Center. Todos os direitos reservados.</p>
         </footer>
     </div>
     
     <script>
-        document.getElementById('downloadBtn').addEventListener('click', function(e) {
+        const downloadBtn = document.getElementById('downloadBtn');
+        const warningModal = document.getElementById('warningModal');
+        const btnCancel = document.getElementById('btnCancel');
+        const btnConfirmDownload = document.getElementById('btnConfirmDownload');
+        const btnText = document.getElementById('btnText');
+        const btnLoader = document.getElementById('btnLoader');
+
+        downloadBtn.addEventListener('click', function(e) {
             e.preventDefault();
-            const btnText = document.getElementById('btnText');
-            const btnLoader = document.getElementById('btnLoader');
-            
             btnText.style.display = 'none';
             btnLoader.style.display = 'block';
             this.classList.add('downloading');
             
-            // Inicia o download de forma invisível
-            const link = document.createElement('a');
-            link.style.display = 'none';
-            link.href = 'https://drive.google.com/uc?export=download&id=1wOEO6CmQk5SgITxAJlFbhcdh-SUgGfBw';
-            link.target = '_blank'; // Abre em nova aba caso o Google Drive peça confirmação de tamanho/vírus
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-            
+            // Mostra o nosso próprio modal de aviso após uma breve animação
             setTimeout(() => {
                 btnText.style.display = 'block';
                 btnLoader.style.display = 'none';
                 this.classList.remove('downloading');
-            }, 3000);
+                warningModal.classList.add('active');
+            }, 1000);
+        });
+
+        btnCancel.addEventListener('click', () => {
+            warningModal.classList.remove('active');
+        });
+
+        btnConfirmDownload.addEventListener('click', () => {
+            warningModal.classList.remove('active');
+            
+            // Inicia o download com a flag confirm=t para tentar pular a tela do Google
+            const link = document.createElement('a');
+            link.style.display = 'none';
+            link.href = 'https://drive.google.com/uc?export=download&confirm=t&id=1wOEO6CmQk5SgITxAJlFbhcdh-SUgGfBw';
+            link.target = '_blank';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
         });
     </script>
 </body>

@@ -18,6 +18,9 @@
     <!-- Para garantir indexação na Vercel/Google -->
     <meta name="robots" content="index, follow">
 
+    <!-- Favicon (Ícone da aba) -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%233b82f6'><path d='M2 3l6.5-1v9H2V3zm7-1.1l13-1.8v10.9H9V1.9zm13 12.1l-13-1.8V22l13 1.8V14zm-14-1.6l-6.5-1V20l6.5 .9V12.4z'/></svg>">
+    
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
 </head>
@@ -57,25 +60,6 @@
             </div>
         </main>
 
-        <!-- Modal de Aviso -->
-        <div class="modal-overlay" id="warningModal">
-            <div class="modal">
-                <div class="modal-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
-                        <line x1="12" y1="9" x2="12" y2="13"></line>
-                        <line x1="12" y1="17" x2="12.01" y2="17"></line>
-                    </svg>
-                </div>
-                <h3>Aviso de Segurança</h3>
-                <p>O arquivo <strong>Win10_22H2_BrazilianPortuguese_x64v1.iso</strong> (5.4 GB) é muito grande para ser verificado contra vírus automaticamente.</p>
-                <p>Deseja fazer o download mesmo assim?</p>
-                <div class="modal-actions">
-                    <button class="btn-cancel" id="btnCancel">Cancelar</button>
-                    <button class="btn-confirm" id="btnConfirmDownload">Baixar mesmo assim</button>
-                </div>
-            </div>
-        </div>
 
         <footer>
             <p>&copy; 2026 Download Center. Todos os direitos reservados.</p>
@@ -84,9 +68,6 @@
     
     <script>
         const downloadBtn = document.getElementById('downloadBtn');
-        const warningModal = document.getElementById('warningModal');
-        const btnCancel = document.getElementById('btnCancel');
-        const btnConfirmDownload = document.getElementById('btnConfirmDownload');
         const btnText = document.getElementById('btnText');
         const btnLoader = document.getElementById('btnLoader');
 
@@ -96,30 +77,20 @@
             btnLoader.style.display = 'block';
             this.classList.add('downloading');
             
-            // Mostra o nosso próprio modal de aviso após uma breve animação
-            setTimeout(() => {
-                btnText.style.display = 'block';
-                btnLoader.style.display = 'none';
-                this.classList.remove('downloading');
-                warningModal.classList.add('active');
-            }, 1000);
-        });
-
-        btnCancel.addEventListener('click', () => {
-            warningModal.classList.remove('active');
-        });
-
-        btnConfirmDownload.addEventListener('click', () => {
-            warningModal.classList.remove('active');
-            
             // Inicia o download direto e ultrarrápido da Cloudflare R2
             const link = document.createElement('a');
             link.style.display = 'none';
             link.href = 'https://pub-f96ac53119af46a09b0b55ffcb0450d3.r2.dev/Win10_22H2_BrazilianPortuguese_x64v1.iso';
-            // link.target = '_blank'; // Não precisamos mais abrir nova aba, pois é download direto
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
+            
+            // Restaura o botão após 3 segundos simulando processamento
+            setTimeout(() => {
+                btnText.style.display = 'block';
+                btnLoader.style.display = 'none';
+                this.classList.remove('downloading');
+            }, 3000);
         });
     </script>
 </body>
